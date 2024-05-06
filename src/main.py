@@ -1,5 +1,6 @@
 import torch
 import argparse
+import os
 import logging as log
 from plot_images import *
 from unet import *
@@ -129,6 +130,10 @@ def sample(device, gpu_perf, timesteps, noise_type, n_sample, sampler_type = 'DD
 
     # save generated images
     image_path = './data/'
+
+    # create path if it doesn't exist
+    if not os.path.exists(image_path):
+        os.makedirs(image_path)
 
     plot_grid(samples, grid_filename)
     # plot_images(samples, image_path) # save individual images
