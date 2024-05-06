@@ -1,4 +1,4 @@
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
 
 # Microdiffusion: Diffusion Models 101
 
@@ -8,7 +8,25 @@ The DDPM and DDIM sampling algorithms are based on the code and labs presented i
 
 This repository shows:
 
-## an implementation of the first diffusion model (DDPM): [Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239) 
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [Microdiffusion: Diffusion Models 101](#microdiffusion-diffusion-models-101)
+  - [An implementation of the first diffusion model (DDPM): Denoising Diffusion Probabilistic Models](#an-implementation-of-the-first-diffusion-model-ddpm-denoising-diffusion-probabilistic-modelshttpsarxivorgabs200611239)
+    - [Sampling](#sampling)
+  - [how to implement the faster DDIM model: Denoising Diffusion Implicit Models](#how-to-implement-the-faster-ddim-model-denoising-diffusion-implicit-modelshttpsarxivorgabs201002502)
+  - [Test with different noise schedulers: Linear, Quadratic, Sigmoid and Cosine.](#test-with-different-noise-schedulers-linear-quadratic-sigmoid-and-cosine)
+  - [A simple example of what can be done using the awesome einops library for tensor operations.](#a-simple-example-of-what-can-be-done-using-the-awesome-einops-libraryhttpsgithubcomarogozhnikoveinops-for-tensor-operations)
+  - [A simple data augmentation technique for traning using Torchvision's transforms](#a-simple-data-augmentation-technique-for-traning-using-torchvisions-transformshttpspytorchorgvisionmastergeneratedtorchvisiontransformsrandomhorizontalfliphtml)
+  - [The Unet implementation is from the course, I found some nice educational material](#the-unet-implementation-is-from-the-course-i-found-some-nice-educational-material)
+  - [how to get GPU Performance using Pytorch API and Pynvml libraries.](#how-to-get-gpu-performance-using-pytorch-apihttpspytorchorgdocsmastergeneratedtorchcudamemory_statshtmltorchcudamemory_stats-and-pynvmlhttpspypiorgprojectpynvml-libraries)
+  - [how to build an web interface for the sampling using Gradio.](#how-to-build-an-web-interface-for-the-sampling-using-gradiohttpswwwgradioapp)
+- [Next steps:](#next-steps)
+
+<!-- /code_chunk_output -->
+
+## An implementation of the first diffusion model (DDPM): [Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239) 
 
 ### Sampling
 
@@ -44,11 +62,13 @@ noise scheduler: cosine (https://betterprogramming.pub/diffusion-models-ddpms-dd
 
 ## The Unet implementation is from the course, I found some nice educational material 
 
-## how to get GPU Performance using [Pytorch API](https://pytorch.org/docs/master/generated/torch.cuda.memory_stats.html#torch.cuda.memory_stats) and [Pynvml](https://pypi.org/project/pynvml/) libraries.
+## How to get GPU Performance using [Pytorch API](https://pytorch.org/docs/master/generated/torch.cuda.memory_stats.html#torch.cuda.memory_stats) and [Pynvml](https://pypi.org/project/pynvml/) libraries.
 
 ![GPU perf](docs/training_gpu_perf.png)
 
 ## how to build an web interface for the sampling using [Gradio](https://www.gradio.app).
+
+run the command line: `gradio src/gradiointerface.py`
 
 ![Web interface](docs/gradio.png)
 
