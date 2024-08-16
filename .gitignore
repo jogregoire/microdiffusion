@@ -4,3 +4,4 @@ out*
 grid*
 data/**
 .conda/**
+*.onnx
