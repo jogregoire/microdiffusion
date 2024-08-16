@@ -70,7 +70,7 @@ def train(device, gpu_perf, timesteps, noise_type, batch_size, n_epoch, use_cont
     model_filename = f"./weights/model_trained_{timesteps}_{noise_type}_{batch_size}_{n_epoch}_context.pth"
 
     log.info(f'building model with in_channels={in_channels}, n_feat={n_feat}, n_cfeat={n_cfeat}, height={height}')
-    nn_model = nn_model = ContextUnet(in_channels, n_feat=n_feat, n_cfeat=n_cfeat, height=height).to(device)
+    nn_model = ContextUnet(in_channels, n_feat=n_feat, n_cfeat=n_cfeat, height=height).to(device)
     
     # create noise scheduler
     noise = NoiseScheduler(timesteps, device, noise_type)
