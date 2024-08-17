@@ -14,7 +14,7 @@ from training import *
 def main():
     parser = argparse.ArgumentParser(description='PyTorch Example')
     parser.add_argument("--log", nargs='+', help="Provide logging level. Example --log debug'")
-    parser.add_argument("--train", help="Train the model")
+    parser.add_argument("--train", action='store_true', help="Train the model")
     parser.add_argument("--timesteps", help="Timesteps")
     args = parser.parse_args()
 
