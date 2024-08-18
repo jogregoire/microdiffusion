@@ -21,7 +21,7 @@ This repository shows:
 - [how to build an web interface for the sampling using Gradio.](#how-to-build-an-web-interface-for-the-sampling-using-gradio)
 - [How to convert the pytorch model to ONNX (https://onnx.ai/)](#how-to-convert-the-pytorch-model-to-onnx-httpsonnxai)
 - [How to train the models with different hyperparameters](#how-to-train-the-models-with-different-hyperparameters)
-- [Next steps:](#next-steps)
+- [Next steps](#next-steps)
 
 
 ## An implementation of the first diffusion model (DDPM): [Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239) 
@@ -136,7 +136,9 @@ python src/main.py --train --batchsize 2000
 python src/main.py --train --timesteps 1000
 ```
 
-## Next steps:
+## Next steps
+
+- sample images using the ONNX runtime
 
 - Classifier-Free Guidance
 
