@@ -1,6 +1,6 @@
 
 
-# Microdiffusion: Diffusion Models 101
+## Microdiffusion: Diffusion Models 101
 
 Microdiffusion implements the basic of images diffusion. It implements both the training and sampling.In the example, it uses Sprites by ElvGames, [FrootsnVeggies](https://zrghr.itch.io/froots-and-veggies-culinary-pixels) and [kyrise](https://kyrise.itch.io/kyrises-free-16x16-rpg-icon-pack), that is packaged as Numpy muti-dimensional arrays.
 
@@ -10,18 +10,18 @@ This repository shows:
 
 
 - [Microdiffusion: Diffusion Models 101](#microdiffusion-diffusion-models-101)
-  - [An implementation of the first diffusion model (DDPM): Denoising Diffusion Probabilistic Models](#an-implementation-of-the-first-diffusion-model-ddpm-denoising-diffusion-probabilistic-models)
-    - [Sampling](#sampling)
-  - [how to implement the faster DDIM model: Denoising Diffusion Implicit Models](#how-to-implement-the-faster-ddim-model-denoising-diffusion-implicit-models)
-  - [Test with different noise schedulers: Linear, Quadratic, Sigmoid and Cosine.](#test-with-different-noise-schedulers-linear-quadratic-sigmoid-and-cosine)
-  - [A simple example of what can be done using the awesome einops library for tensor operations.](#a-simple-example-of-what-can-be-done-using-the-awesome-einops-library-for-tensor-operations)
-  - [A simple data augmentation technique for training using Torchvision's transforms](#a-simple-data-augmentation-technique-for-training-using-torchvisions-transforms)
-  - [The Unet implementation is from the course, I found some nice educational material](#the-unet-implementation-is-from-the-course-i-found-some-nice-educational-material)
-  - [How to get GPU Performance using Pytorch API and Pynvml libraries.](#how-to-get-gpu-performance-using-pytorch-api-and-pynvml-libraries)
-  - [how to build an web interface for the sampling using Gradio.](#how-to-build-an-web-interface-for-the-sampling-using-gradio)
-  - [How to convert the pytorch model to ONNX (https://onnx.ai/)](#how-to-convert-the-pytorch-model-to-onnx-httpsonnxai)
+- [An implementation of the first diffusion model (DDPM): Denoising Diffusion Probabilistic Models](#an-implementation-of-the-first-diffusion-model-ddpm-denoising-diffusion-probabilistic-models)
+  - [Sampling](#sampling)
+- [how to implement the faster DDIM model: Denoising Diffusion Implicit Models](#how-to-implement-the-faster-ddim-model-denoising-diffusion-implicit-models)
+- [Test with different noise schedulers: Linear, Quadratic, Sigmoid and Cosine.](#test-with-different-noise-schedulers-linear-quadratic-sigmoid-and-cosine)
+- [A simple example of what can be done using the awesome einops library for tensor operations.](#a-simple-example-of-what-can-be-done-using-the-awesome-einops-library-for-tensor-operations)
+- [A simple data augmentation technique for training using Torchvision's transforms](#a-simple-data-augmentation-technique-for-training-using-torchvisions-transforms)
+- [The Unet implementation is from the course, I found some nice educational material](#the-unet-implementation-is-from-the-course-i-found-some-nice-educational-material)
+- [How to get GPU Performance using Pytorch API and Pynvml libraries.](#how-to-get-gpu-performance-using-pytorch-api-and-pynvml-libraries)
+- [how to build an web interface for the sampling using Gradio.](#how-to-build-an-web-interface-for-the-sampling-using-gradio)
+- [How to convert the pytorch model to ONNX (https://onnx.ai/)](#how-to-convert-the-pytorch-model-to-onnx-httpsonnxai)
+- [How to train the models with different hyperparameters](#how-to-train-the-models-with-different-hyperparameters)
 - [Next steps:](#next-steps)
-
 
 
 ## An implementation of the first diffusion model (DDPM): [Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239) 
@@ -102,9 +102,41 @@ Instead I compute the path for the model during the initialization, which works 
 
 As a next step, I also need to save the weigths and biases to the ONNX model.
 
-# Next steps:
+The notebook onnx_simple.ipynb shows how to run a model using ONNX runtime.
 
-- use the ONNX model
+## How to train the models with different hyperparameters
+
+```python
+Usage: main.py [-h] [--log LOG] [--train] [--timesteps TIMESTEPS] [--batchsize BATCHSIZE] [--epoch EPOCH]
+               [--noise {linear,cosine,quadratic,sigmoid}]
+
+train or sample new 16x16 images
+
+options:
+  -h, --help            show this help message and exit
+  --log LOG             Provide logging level. Example --log debug
+  --train               Train the model
+  --timesteps TIMESTEPS
+                        Timesteps (default: 500)
+  --batchsize BATCHSIZE
+                        Batch size (default: 100)
+  --epoch EPOCH         Epoch size (default: 32)
+  --noise {linear,cosine,quadratic,sigmoid}
+                        Noise type (default: linear)
+```
+
+command line examples to regenerate the models provided in this repo:
+
+```python
+python src/main.py --train
+python src/main.py --train --noise cosine
+python src/main.py --train --noise quadratic
+python src/main.py --train --noise sigmoid
+python src/main.py --train --batchsize 2000
+python src/main.py --train --timesteps 1000
+```
+
+## Next steps:
 
 - Classifier-Free Guidance
 

@@ -12,27 +12,33 @@ from gpuperf import *
 from training import *
 
 def main():
-    parser = argparse.ArgumentParser(description='PyTorch Example')
-    parser.add_argument("--log", nargs='+', help="Provide logging level. Example --log debug'")
+    parser = argparse.ArgumentParser(description='train or sample new 16x16 images')
+    parser.add_argument("--log", help="Provide logging level. Example --log debug")
     parser.add_argument("--train", action='store_true', help="Train the model")
-    parser.add_argument("--timesteps", help="Timesteps")
+    parser.add_argument("--timesteps", type=int, default=500, help="Timesteps (default: 500)")
+    parser.add_argument("--batchsize", type=int, default=100, help="Batch size (default: 100)")
+    parser.add_argument("--epoch", type=int, default=32, help="Epoch size (default: 32)")
+    parser.add_argument("--noise", choices=['linear', 'cosine', 'quadratic', 'sigmoid'], 
+                        default='linear', help="Noise type (default: linear)")
     args = parser.parse_args()
 
     device, gpu_perf = initialize(args.log[0] if args.log else 'INFO')
 
     # diffusion hyperparameters
-    if args.timesteps:
-        timesteps = int(args.timesteps)
-    else:
-        timesteps = 500
+    timesteps = args.timesteps
+    batch_size = args.batchsize
+    n_epoch = args.epoch
 
-    noise_type = NoiseScheduler.LINEAR
+    noise_mapping = {
+        'linear': NoiseScheduler.LINEAR,
+        'cosine': NoiseScheduler.COSINE,
+        'quadratic': NoiseScheduler.QUADRATIC,
+        'sigmoid': NoiseScheduler.SIGMOID
+    }
+    noise_type = noise_mapping[args.noise]
 
-    #args.train = True
     if args.train:
         # training hyperparameters
-        batch_size = 100
-        n_epoch = 32
         use_context=True
         train(device, gpu_perf, timesteps, noise_type, batch_size, n_epoch, use_context)
     else:
